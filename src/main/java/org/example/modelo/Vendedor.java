@@ -10,4 +10,16 @@ public class Vendedor {
         this.email = email;
         this.cpf = cpf;
     }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
 }
