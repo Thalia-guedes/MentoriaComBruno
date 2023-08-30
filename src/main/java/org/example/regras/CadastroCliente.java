@@ -1,15 +1,24 @@
 package org.example.regras;
 
 import org.example.modelo.Cliente;
+import org.example.repositorio.ClienteDB;
+import org.example.repositorio.DBConnection;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CadastroCliente {
+    private final ClienteDB clienteDB;
     private List<Cliente> clientes = new ArrayList<>();
-    public List<Cliente> listarTodos(){
-        return clientes;
+
+    public CadastroCliente() {
+        clienteDB = new ClienteDB(DBConnection.getConnection());
     }
+
+    public List<Cliente> listarTodos(){
+        return clienteDB.listarTodos();
+    }
+
     public Cliente pesquisarPorCpf(String cpf){
         for (Cliente cliente : clientes) {
             if (cliente.possuiCpf(cpf)) {
@@ -30,7 +39,7 @@ public class CadastroCliente {
         if (emailValido != null){
             throw new IllegalArgumentException("Email ja cadastrado");
         }
-        clientes.add(cliente);
+        clienteDB.salvar(cliente);
         return cliente;
     }
 
