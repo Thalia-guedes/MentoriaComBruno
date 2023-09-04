@@ -46,4 +46,46 @@ public class ClienteDB {
         }
         return clientes;
     }
+    public Cliente atualizar(Cliente cliente){
+        try {
+            connection.createStatement().execute(
+                    "UPDATE cliente " + "SET nome = '" + cliente.getNome() + "', " +
+                            "cpf = '" + cliente.getCpf() + "', " +
+                            "email = '" + cliente.getEmail() + "' " +
+                            "WHERE id = " + cliente.getId()
+            );
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return cliente;
+    }
+    public void deletar(int clienteId) {
+        try {
+            connection.createStatement().execute(
+                    "DELETE FROM cliente WHERE id = " + clienteId
+            );
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public Cliente buscarPorCpf(String cpf){
+
+        try {
+            ResultSet resultSet = connection.createStatement().executeQuery("select * from cliente where cpf = '"+cpf+"'");
+            if (resultSet.next()){
+                Integer id = resultSet.getInt(1);
+                String nome = resultSet.getString(2);
+                String cpfDb = resultSet.getString(3);
+                String email = resultSet.getString(4);
+                Cliente cliente = new Cliente(id, nome, cpfDb, email);
+
+                return cliente;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return null;
+    }
+
+
 }

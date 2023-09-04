@@ -20,4 +20,5 @@ public class DBConnection {
            throw new RuntimeException(e);
        }
    }
+   ///TAREFA DE CASA FAZER AS FUNÇOES E METODOS PARA UPDATE E DELETE, ATUALIZAR NA MAIN
 }

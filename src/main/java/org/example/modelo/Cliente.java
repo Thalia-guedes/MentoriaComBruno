@@ -2,6 +2,11 @@ package org.example.modelo;
 
 public class Cliente {
     private final Integer id;
+
+    public Integer getId() {
+        return id;
+    }
+
     private final String nome;
     private final String email;
     private final String cpf;
