@@ -4,7 +4,6 @@ import org.example.modelo.Cliente;
 import org.example.repositorio.ClienteDB;
 import org.example.repositorio.DBConnection;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CadastroCliente {
@@ -19,9 +18,7 @@ public class CadastroCliente {
     }
 
     public Cliente adicionar(Cliente cliente) {
-        if (!cliente.getEmail().contains("@")) {
-            throw new IllegalArgumentException("Email sem @.");
-        }
+        cliente.validarEmail();
         Cliente clienteComCpf = clienteDB.buscarPorCpf(cliente.getCpf());
         if (clienteComCpf != null) {
             throw new IllegalArgumentException("CPF ja existente");
@@ -38,6 +35,13 @@ public class CadastroCliente {
         Cliente cliente = clienteDB.buscarPorCpf(cpf);
         if (cliente != null) {
             clienteDB.deletar(cliente.getId());
+        }
+        return cliente;
+    }
+    public Cliente buscarPorcpf(String cpf){
+        Cliente cliente = clienteDB.buscarPorCpf(cpf);
+        if (cliente != null){
+            clienteDB.buscarPorCpf(cliente.getCpf());
         }
         return cliente;
     }

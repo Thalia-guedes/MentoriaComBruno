@@ -38,8 +38,10 @@ public class Cliente {
         return cpf;
     }
 
-    public Boolean possuiCpf(String cpf){
-        return this.cpf.equals(cpf);
+    public void validarEmail(){
+        if (!email.contains("@")) {
+            throw new IllegalArgumentException("Email sem @.");
+        }
     }
 
     @Override

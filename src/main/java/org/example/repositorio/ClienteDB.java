@@ -18,7 +18,6 @@ public class ClienteDB {
     }
 
     public void salvar(Cliente cliente){
-
         try {
             connection.createStatement().
                     execute(
@@ -86,6 +85,5 @@ public class ClienteDB {
         }
         return null;
     }
-
 
 }
