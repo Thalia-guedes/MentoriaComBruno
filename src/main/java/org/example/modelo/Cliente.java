@@ -1,14 +1,32 @@
 package org.example.modelo;
 
-public class Cliente {
-    private String nome;
-    private String email;
-    private String cpf;
+import org.example.regras.CadastroCliente;
+import org.example.regras.CadastroVendedor;
 
-    public Cliente(String nome, String email, String cpf) {
+public class Cliente {
+    private final Integer id;
+
+    public Integer getId() {
+        return id;
+    }
+
+    private final String nome;
+    private final String email;
+    private final String cpf;
+
+    public Cliente(int id, String nome, String email, String cpf) {
+        this.id = id;
         this.nome = nome;
         this.email = email;
         this.cpf = cpf;
+    }
+
+    public Cliente(String nome, String email, String cpf) {
+        this.id = null;
+        this.nome = nome;
+        this.email = email;
+        this.cpf = cpf;
+
     }
 
     public String getNome() {
@@ -21,5 +39,21 @@ public class Cliente {
 
     public String getCpf() {
         return cpf;
+    }
+
+    public void validarEmail(){
+        if (!email.contains("@")) {
+            throw new IllegalArgumentException("Email sem @.");
+        }
+    }
+
+
+    @Override
+    public String toString() {
+        return "Cliente{" +
+                "nome='" + nome + '\'' +
+                ", email='" + email + '\'' +
+                ", cpf='" + cpf + '\'' +
+                '}';
     }
 }
