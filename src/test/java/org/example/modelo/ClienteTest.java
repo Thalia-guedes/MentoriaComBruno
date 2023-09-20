@@ -3,7 +3,8 @@ package org.example.modelo;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 
 public class ClienteTest {
     @Test
@@ -26,4 +27,5 @@ public class ClienteTest {
 
         assertEquals("Email sem @.", illegalArgumentException.getMessage());
     }
+
 }

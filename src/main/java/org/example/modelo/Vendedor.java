@@ -33,6 +33,13 @@ public class Vendedor {
     public String getCpf() {
         return cpf;
     }
+    public void validarEmail(){
+        if (!email.contains("@")) {
+            throw new IllegalArgumentException("Email sem @.");
+        }
+    }
+
+
     @Override
     public String toString() {
         return "Vendedor{" +

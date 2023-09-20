@@ -9,8 +9,8 @@ import java.util.List;
 public class CadastroCliente {
     private final ClienteDB clienteDB;
 
-    public CadastroCliente() {
-        clienteDB = new ClienteDB(DBConnection.getConnection());
+    public CadastroCliente (ClienteDB clienteDB){
+        this.clienteDB = clienteDB;
     }
 
     public List<Cliente> listarTodos() {
@@ -45,7 +45,6 @@ public class CadastroCliente {
         }
         return cliente;
     }
-
 
     public Cliente atualizar(Cliente cliente) {
         Cliente clienteAtualizado = clienteDB.atualizar(cliente);

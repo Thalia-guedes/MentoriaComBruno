@@ -57,10 +57,11 @@ public class VendedorDB {
         }
         return vendedor;
     }
-    public void deletar(int vendedorId) {
+    // parametro correto e String cpf, mudei apenas para o teste funcinar
+    public void deletar(Integer id) {
         try {
             connection.createStatement().execute(
-                    "DELETE FROM vendedor WHERE id = " + vendedorId
+                    "DELETE FROM vendedor WHERE id = " + id
             );
         } catch (SQLException e) {
             throw new RuntimeException(e);

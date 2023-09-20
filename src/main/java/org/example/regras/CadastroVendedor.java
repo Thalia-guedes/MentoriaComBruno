@@ -11,13 +11,14 @@ import java.util.List;
 public class CadastroVendedor {
     private final VendedorDB vendedorDB;
 
-    public CadastroVendedor(VendedorDB vendedorDB) {
+    public CadastroVendedor (VendedorDB vendedorDB){
         this.vendedorDB = vendedorDB;
     }
 
     public List<Vendedor> listarTodos() {
         return vendedorDB.listarTodos();
     }
+    //metodo testado
     public Vendedor buscarPorcpf(String cpf){
         Vendedor vendedor = vendedorDB.buscarPorCpf(cpf);
         if (vendedor != null){
@@ -25,12 +26,11 @@ public class CadastroVendedor {
         }
         return vendedor;
     }
+    //metodo testado
     public Vendedor adicionar(Vendedor vendedor) {
-        if (!vendedor.getEmail().contains("@")) {
-            throw new IllegalArgumentException("Email sem @.");
-        }
-        Vendedor vendedorComCpf = vendedorDB.buscarPorCpf(vendedor.getCpf());
-        if (vendedorComCpf != null) {
+        vendedor.validarEmail();
+        Vendedor vendedorComCPF = vendedorDB.buscarPorCpf(vendedor.getCpf());
+        if (vendedorComCPF != null) {
             throw new IllegalArgumentException("CPF ja existente");
         }
         Vendedor emailValido = validarEmail(vendedor.getEmail());
@@ -40,6 +40,7 @@ public class CadastroVendedor {
         vendedorDB.salvar(vendedor);
         return vendedor;
     }
+    //metodo testado
     public Vendedor remover(String cpf) {
         Vendedor vendedor = vendedorDB.buscarPorCpf(cpf);
         if (vendedor != null) {

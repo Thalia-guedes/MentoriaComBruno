@@ -58,7 +58,7 @@ public class ClienteDB {
         }
         return cliente;
     }
-    public void deletar(int clienteId) {
+    public void deletar(Integer clienteId) {
         try {
             connection.createStatement().execute(
                     "DELETE FROM cliente WHERE id = " + clienteId

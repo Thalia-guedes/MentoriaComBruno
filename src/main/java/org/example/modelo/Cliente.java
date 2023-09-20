@@ -1,5 +1,8 @@
 package org.example.modelo;
 
+import org.example.regras.CadastroCliente;
+import org.example.regras.CadastroVendedor;
+
 public class Cliente {
     private final Integer id;
 
@@ -43,6 +46,7 @@ public class Cliente {
             throw new IllegalArgumentException("Email sem @.");
         }
     }
+
 
     @Override
     public String toString() {

@@ -1,24 +1,29 @@
 package org.example;
 
 import org.example.modelo.Cliente;
+import org.example.modelo.Produto;
 import org.example.modelo.Vendedor;
 import org.example.regras.CadastroCliente;
 import org.example.regras.CadastroVendedor;
 import org.example.repositorio.ClienteDB;
 import org.example.repositorio.DBConnection;
+import org.example.repositorio.ProdutoDB;
 import org.example.repositorio.VendedorDB;
 
 import javax.sound.midi.Soundbank;
+import java.math.BigDecimal;
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
-        CadastroCliente cadastroCliente = new CadastroCliente();
+        CadastroCliente cadastroCliente = new CadastroCliente(new ClienteDB(DBConnection.getConnection()));
         VendedorDB vendedorDB = new VendedorDB(DBConnection.getConnection());
         CadastroVendedor cadastroVendedor = new CadastroVendedor(vendedorDB);
+        ProdutoDB produtoDB = new ProdutoDB(DBConnection.getConnection());
         Scanner scanner = new Scanner(System.in);
         boolean sair = false;
 
@@ -33,7 +38,10 @@ public class Main {
             System.out.println("7. Listar Todos os Vendedores");
             System.out.println("8. Atualizar Vendedor");
             System.out.println("9. Deletar Vendedor");
-            System.out.println("10. Buscar Cliente por CPF");
+            System.out.println("10. Buscar Vendedor por CPF");
+            System.out.println("11. Adicionar Produto");
+            System.out.println("12. Listar todos os produtos");
+            System.out.println("13. Deletar produto por Id");
             System.out.println("0. Sair");
             System.out.print("Escolha uma opção: ");
 
@@ -114,6 +122,28 @@ public class Main {
                 String cpfBuscarVendedor= scanner.next();
                 cadastroVendedor.buscarPorcpf(cpfBuscarVendedor);
                 break;
+                case 11:
+                    System.out.println("Digite o nome do produto: ");
+                    String nomeProduto = scanner.next();
+                    System.out.println("Digite o preco do produto: ");
+                    Double preco = scanner.nextDouble();
+                    System.out.println("Digite a quantidade do produto: ");
+                    int quantidade = scanner.nextInt();
+                    Double total = preco * quantidade;
+                    System.out.println("O valor total da compra é: " +total);
+                    Produto produto = new Produto(nomeProduto, preco, quantidade, total);
+                    produtoDB.cadastrarProduto(produto);
+                    break;
+                case 12:
+                    List<Produto> produtos = produtoDB.listarTodasAsVendas();
+                    for (Produto produto1 : produtos) {
+                        System.out.println(produto1);
+                    }
+                    break;
+                case 13:
+                    System.out.println("Digite o id do produto: ");
+                    int id = scanner.nextInt();
+                    produtoDB.deletar(id);
                 case 0:
                     sair = true;
                     break;
